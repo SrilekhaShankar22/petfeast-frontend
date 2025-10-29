@@ -1,0 +1,38 @@
+<!-- src/app/pages/products/products-list.component.html -->
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Products <small *ngIf="selectedCategory" class="text-muted">/ {{selectedCategory}}</small></h2>
+
+    <div style="width:240px">
+      <select class="form-select" (change)="loadByCategory($event.target.value)">
+        <option value="">All Categories</option>
+        <option value="Dog">Dog</option>
+        <option value="Cat">Cat</option>
+        <option value="Birds">Birds</option>
+      </select>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <div class="row">
+    <div *ngFor="let p of products" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+      <div class="card h-100 shadow-sm">
+        <img [src]="p.imageUrl || 'assets/images/placeholder.png'" class="card-img-top" alt="{{p.name}}" style="height:180px;object-fit:cover;">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ p.name }}</h5>
+          <p class="card-text text-muted mb-1">{{ p.category }} • ₹{{ p.price }}</p>
+          <p class="small text-truncate" style="flex:1">{{ p.description }}</p>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <button class="btn btn-sm btn-outline-primary" (click)="openDetail(p)">View</button>
+            <button class="btn btn-sm btn-success">Add to cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,9 +6,10 @@
     "outDir": "./out-tsc/spec",
     "types": [
       "jasmine"
-    ]
+    ],
+    "esModuleInterop": true
   },
   "include": [
-    "src/**/*.ts"
-  ]
+    "src/**/*.ts",
+    "src/app/components/category-section/category-section.component.ts"  ]
 }
