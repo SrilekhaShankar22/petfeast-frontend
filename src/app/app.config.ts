@@ -1,11 +1,12 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
+import { ApplicationConfig } from '@angular/core';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
-
 import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
-// src/app/app.config.ts
-export const AppConfig = {
-  apiBase: 'http://localhost:8080/api' // <-- change to your AWS URL when deployed
+export const AppConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(withFetch()),
+    { provide: 'API_BASE_URL', useValue: 'http://localhost:8080/api' } // 👈 your backend URL
+  ]
 };
-

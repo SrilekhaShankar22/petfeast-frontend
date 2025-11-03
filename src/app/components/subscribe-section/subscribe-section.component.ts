@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './subscribe-section.component.html',
   styleUrl: './subscribe-section.component.css',
 })
-export class SubscribeSection {
+export class SubscribeSectionComponent {
 
 }

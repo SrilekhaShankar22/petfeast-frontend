@@ -1,11 +1,14 @@
-// src/app/pages/products/products-list.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../models/product.model';
-import { ProductService } from '../../service/product.service';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProductService } from '../../service/product.service';
+import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'app-products-list',
+  standalone: true,
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.css']
 })
@@ -22,7 +25,7 @@ export class ProductsListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // If route has query param ?category=Dog, load that category
+    // Check for ?category=Dog or ?category=Cat from URL
     this.route.queryParams.subscribe(params => {
       const cat = params['category'];
       if (cat) {
@@ -38,8 +41,15 @@ export class ProductsListComponent implements OnInit {
     this.loading = true;
     this.error = '';
     this.productService.getAll().subscribe({
-      next: data => { this.products = data; this.loading = false; },
-      error: err => { this.error = 'Failed to load products'; this.loading = false; console.error(err); }
+      next: data => {
+        this.products = data;
+        this.loading = false;
+      },
+      error: err => {
+        this.error = 'Failed to load products';
+        this.loading = false;
+        console.error(err);
+      }
     });
   }
 
@@ -48,13 +58,28 @@ export class ProductsListComponent implements OnInit {
     this.loading = true;
     this.error = '';
     this.productService.getByCategory(cat).subscribe({
-      next: data => { this.products = data; this.loading = false; },
-      error: err => { this.error = 'Failed to load products by category'; this.loading = false; console.error(err); }
+      next: data => {
+        this.products = data;
+        this.loading = false;
+      },
+      error: err => {
+        this.error = 'Failed to load products by category';
+        this.loading = false;
+        console.error(err);
+      }
     });
   }
 
+  // ✅ handles category dropdown change
+  onCategoryChange(event: Event) {
+    const select = event.target as HTMLSelectElement;
+    const category = select.value;
+    this.selectedCategory = category;
+    this.loadByCategory(category);
+  }
+
   openDetail(p: Product) {
-    // navigate to product detail if implemented later; placeholder for now
+    // Future: navigate to detail page
     this.router.navigate(['/product', p.id]);
   }
 }
