@@ -1,0 +1,84 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #fff;
+  padding-top: 120px;
+  overflow: hidden;
+}
+
+/* text area */
+.hero-text {
+  position: absolute;
+  left: 90px;
+  top: 220px;
+  z-index: 3;
+  max-width: 520px;
+}
+
+.hero-text h1 {
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #000;
+}
+
+.hero-text .tagline {
+  font-size: 18px;
+  color: #333;
+  margin: 10px 0 20px;
+  max-width: 420px;
+}
+
+.btn {
+  background-color: #7b4a1f;
+  color: #fff;
+  border: none;
+  padding: 14px 26px;
+  border-radius: 26px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 2px 4px 6px rgba(0,0,0,.18);
+  transition: transform .15s ease, background-color .15s ease;
+}
+.btn:hover {
+  background-color: #9a6635;
+  transform: translateY(-2px);
+}
+
+/* paw under button */
+.paw {
+  position: absolute;
+  left: 100px;
+  top: 520px;
+  z-index: 1;
+}
+.paw img {
+  width: 55px;
+  opacity: 0.9;
+}
+
+/* smaller half circle and image */
+.hero-circle {
+  position: absolute;
+  top: 140px;
+  right: 0;
+  width: 700px;     /* ⬇ smaller circle */
+  height: 700px;    /* ⬇ smaller circle */
+  background: #7b4a1f;
+  border-top-left-radius: 700px;
+  border-bottom-left-radius: 700px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(160px);
+  z-index: 2;
+}
+
+.hero-img {
+  width: 600px;   /* ⬇ smaller image */
+  height: 370px;
+  object-fit: cover;
+}
